@@ -1,60 +1,58 @@
-#Git WunderFlow
+# Git WunderFlow
 
-##Description
-WunderFlow is a Git workflow that tries to make it easier to have multiple ongoing development tracks simultaneously while still allowing clean releases and steady hotfixes. It also makes it easy to show any unfinished work to customers. 
+## Description
+WunderFlow is a Git workflow that tries to make it easier to have multiple ongoing development tracks simultaneously while still allowing clean releases and steady hotfixes. It also makes it easy to show any unfinished work to customers.
 
-##Main branches
+## Main branches
 
-###Develop
-- Branch for showing new features  to customer etc.
+### Develop
+- Branch for showing new features to customer etc.
 - Deployed to dev server
 - Feature / hotfix branches can be merged here anytime for testing purposes
 - This branch can be reset to master anytime, so no code living only in this branch will end up in production
 - It is also possible to skip this branch if it is possible to use environment per branch
 
-###Master
+### Master
 - Integration / QA for next release
 - Deployed to stage server
 - Base branch for all new features
 
-###Production
+### Production
 - Production
 - Always equal to the actual code currently running on production servers
 
+## Development workflow
 
-##Development workflow
-
-###New feature
-- Create new branch from master 
+### New feature
+- Create new branch from master
   - feature/#[issue/ticket id]-issueTitle (where # is C for extra/cont dev cases and I for incidents)
 - Merge to develop for testing / acceptance
 - Merge to master once finished /accepted (or create merge / review request)
 
-###Epic features
+### Epic features
 Sometimes there might be bigger project that needs to be developed separately and where different features are dependant from each other
 - Create new epic branch from master epic/[EpicName]
 - Create all the feature branches that belong to this project from the epic branch feature/[EpicName]/[featureInThisEpic]
 - Merge feature branches to epic branch, then epic branch to develop for testing
 - If needed epic branch can be reset to master to clean up experimental features
 - Only delete feature branches after the epic branch is accepted to master
-- For release treat epic branch as any other feature branch 
+- For release treat epic branch as any other feature branch
 
-###Hotfix
+### Hotfix
 - Create new branch from production
 - Hotfix/#[ticket id]-issueTitle (where # is C for extra/cont dev cases and I for issues, so usually I)
 - Merge to develop for testing
 - Merge to production for release (or create merge / review request)
 - Rebase master to production
 
-
-###Release
+### Release
 - Merge all accepted / finished feature branches to master (that are not yet merged)
 - Cleanup finished feature branches
 - Run tests on master
 - Tag new release
 - Merge to production
 
-##Examples
+## Examples
 
 Create a new feature and push it to develop for testing
 ```
@@ -69,6 +67,7 @@ git pull origin develop
 git merge --no-ff feature/c1234-adding_this
 git push origin develop
 ```
+
 Create a hotfix
 ```
 git checkout production
@@ -89,6 +88,7 @@ git push origin production
 git rebase production master
 git push origin master
 ```
+
 Publish a feature to master for the pre-release
 ```
 git checkout master
